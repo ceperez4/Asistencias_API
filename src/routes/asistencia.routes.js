@@ -1,23 +1,25 @@
 import { Router } from "express";
 
-import {} from './../controllers/asistencia.controller';
+import {getAsistencias, createAsistencia, getAsistenciaById, deleteAsistenciaById, updateAsistenciaById, getAsistenciasPorFecha, getAsistenciasPorMateria, getInasistenciasPorAlumnoMateria} from './../controllers/asistencia.controller';
 
 
 const router = Router();
 
-router.get('/alumnos');
+router.get('/asistencias', getAsistencias);
 
-router.post('/alumnos');
+router.post('/asistencia', createAsistencia);
 
-router.get('/alumnos');
+router.get('/asistencia/:id', getAsistenciaById);
 
-router.delete('/alumnos');
+router.delete('/asistencia/:id', deleteAsistenciaById);
 
-router.put('/alumnos');
-
-
+router.put('/asistencia/:id', updateAsistenciaById);
 
 
+router.get('/asistencia-fecha', getAsistenciasPorFecha);
 
+router.get('/asistencia-materia', getAsistenciasPorMateria);
+
+router.get('/asistencia-inasistencia-materia-alumno', getInasistenciasPorAlumnoMateria);
 
 export default router;

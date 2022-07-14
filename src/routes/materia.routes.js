@@ -1,21 +1,25 @@
 import { Router } from "express";
 
-import {} from './../controllers/materia.controller';
+import {getMaterias, createMateria, getMateriaById, deleteMateriaById, updateAlumnoById,getMateriaMasFaltas,getMateriaListado,getMateriaMasAsiatencias} from './../controllers/materia.controller';
 
 
 const router = Router();
 
-router.get('/alumnos');
+router.get('/materias',getMaterias);
 
-router.post('/alumnos');
+router.post('/materia', createMateria);
 
-router.get('/alumnos');
+router.get('/materia/:id', getMateriaById);
 
-router.delete('/alumnos');
+router.delete('/materia/:id', deleteMateriaById);
 
-router.put('/alumnos');
+router.put('/materia/:id', updateAlumnoById);
 
+router.get('/materias-mas-faltas',getMateriaMasFaltas);
 
+router.get('/materia-listado/:materia', getMateriaListado);
+
+router.get('/materias-mas-asistencias',getMateriaMasAsiatencias);
 
 
 

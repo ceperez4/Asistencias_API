@@ -21,7 +21,7 @@ export const createAlumnos = async (req, res) => {
 
   const { CI_ALUMNO, NOMBRE_ALUMNO, APELLIDO_ALUMNO, CELULAR_ALUMNO } = req.body;
 
-  if (CI_ALUMNO == null || CI_ALUMNO == null || APELLIDO_ALUMNO == null || CELULAR_ALUMNO == null) {
+  if (CI_ALUMNO == null || NOMBRE_ALUMNO == null || APELLIDO_ALUMNO == null || CELULAR_ALUMNO == null) {
     return res.status(400).json({ msg: 'Bad Request. Please Fill all fields' })
   }
 
@@ -110,6 +110,64 @@ export const updateAlumnoById = async (req, res) => {
 
     res.json({ CI_ALUMNO, NOMBRE_ALUMNO, APELLIDO_ALUMNO, CELULAR_ALUMNO });
  
+
+  } catch (error) {
+    res.status(500)
+    res.send(error.message)
+  }
+
+
+}
+
+
+export const getFaltasPorAlumno = async (req, res) => {
+
+  const {name} = req.params;
+  
+  try {
+    const pool = await getConnection();
+    const result = await pool.request()
+    .input('NOMBRE_ALUMNO', sql.Char,name)
+    .query(queries.getFaltasPorAlumno);
+    console.log(result)
+    res.send(result.recordset);
+
+  } catch (error) {
+    res.status(500)
+    res.send(error.message)
+  }
+
+
+}
+
+export const getFaltasPorAlumnoFecha = async (req, res) => {
+
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getFaltasPorAlumnoFecha);
+
+    res.json(result.recordset);
+
+  } catch (error) {
+    res.status(500)
+    res.send(error.message)
+  }
+
+}
+
+
+
+export const getAlumnoFaltaNumero = async (req, res) => {
+
+  const {falta} = req.params;
+  
+  try {
+    const pool = await getConnection();
+    const result = await pool.request()
+    .input('falta', sql.Int,falta)
+    .query(queries.getAlumnoFaltaNumero);
+    console.log(result)
+    res.send(result.recordset);
 
   } catch (error) {
     res.status(500)

@@ -1,23 +1,27 @@
 import { Router } from "express";
 
-import {} from './../controllers/profesor.controller';
+import {getProfesores, createProfesor, getProfesorById, deleteProfesorById, updateProfesorById, getProfesorMateria, getProfesorNumeroEstudiantes,getMateriaPorNombreProfesor} from './../controllers/profesor.controller';
 
 
 const router = Router();
 
-router.get('/alumnos');
+router.get('/profesores',getProfesores);
 
-router.post('/alumnos');
+router.post('/profesor', createProfesor);
 
-router.get('/alumnos');
+router.get('/profesor/:id', getProfesorById);
 
-router.delete('/alumnos');
+router.delete('/profesor/:id', deleteProfesorById);
 
-router.put('/alumnos');
-
-
+router.put('/profesor/:id', updateProfesorById);
 
 
+
+router.get('/profesores-materias',getProfesorMateria);
+
+router.get('/profesores-numero-alumnos',getProfesorNumeroEstudiantes);
+
+router.get('/profesores-nombre/:nombreapellido',getMateriaPorNombreProfesor);
 
 
 export default router;
